@@ -23,3 +23,26 @@ document.getElementById("search-btn").addEventListener("click", function () {
   fetchWeatherData(city);
 });
 
+function generateWeatherForecast(city) {
+  const weatherConditions = ["Sunny", "Cloudy", "Rainy", "Snowy"];
+  const forecast = [];
+  const currentDate = new Date();
+  for (let i = 0; i < 3; i++) {
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; // Months are 0-based
+    const year = currentDate.getFullYear();
+    const temperature = Math.random() * 45 - 10;
+    const condition =
+      weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+    const humidity = Math.random() * 100;
+    forecast.push({
+      date: `${month}/${day}/${year}`,
+      temperature,
+      condition,
+      humidity,
+    });
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  return forecast;
+}
+
