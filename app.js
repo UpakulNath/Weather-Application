@@ -82,22 +82,17 @@ async function fetchWeatherData(latitude, longitude) {
 }
 
 function getUserLocation() {
-const isLocationAvailable = Math.random() > 0.2; 
-if (!isLocationAvailable) {
-throw new Error("Failed to detect location. Geolocation data is unavailable.");
+  return {
+    latitude: 40.7128,
+    longitude: -74.006,
+  };
 }
-return {
-latitude: 40.7128,
-longitude: -74.0060
-};
-}
+
+const location1 = getUserLocation();
 
 
 // ⬇️ moved this OUTSIDE of fetchWeatherData so it's usable
 function generateWeatherForecast(city, latitude, longitude) {
-  if (typeof city !== "string" || city.trim() === "") {
-    throw new Error("Invalid city name. Please provide a valid city.");
-  }
   const weatherConditions = ["Sunny", "Cloudy", "Rainy", "Snowy"];
   const forecast = [];
   const currentDate = new Date();
@@ -121,6 +116,36 @@ function generateWeatherForecast(city, latitude, longitude) {
   }
   return forecast;
 }
+
+const forecastData = generateWeatherForecast(
+  "New York",
+  location1.latitude,
+  location1.longitude
+);
+
+function getWeatherIcon(condition) {
+  switch (condition) {
+    case "Sunny":
+      return "☀️";
+    case "Cloudy":
+      return "☁️";
+    case "Rainy":
+      return "🌧️";
+    case "Snowy":
+      return "❄️";
+    default:
+      return "❓";
+  }
+}
+forecastData.forEach((dayForecast) => {
+  const weatherIcon = getWeatherIcon(dayForecast.condition);
+  console.log(`Date: ${dayForecast.date}`);
+  console.log(`Condition: ${dayForecast.condition} ${weatherIcon}`);
+  console.log(`Temperature: ${dayForecast.temperature.toFixed(1)}°C`);
+  console.log(`Humidity: ${dayForecast.humidity.toFixed(1)}%`);
+  console.log(`Location: (${dayForecast.latitude}, ${dayForecast.longitude})`);
+});
+
 
 
 
