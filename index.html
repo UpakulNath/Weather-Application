@@ -2,64 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,
-initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Weather App</h1>
+
+    <main class="container">
+      <!-- Search area -->
+      <div class="search-bar">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Enter city name (e.g., London)"
+          aria-label="City name"
+        />
+        <button id="search-btn" aria-label="Search">Search</button>
+      </div>
+
+      <!-- Optional: quick buttons -->
+      <div class="quick-buttons">
+        <button class="quick" data-city="New York">New York</button>
+        <button class="quick" data-city="Tokyo">Tokyo</button>
+        <button class="quick" data-city="Delhi">Delhi</button>
+      </div>
+
+      <!-- Weather display -->
+      <section class="weather-info" id="weather-info" aria-live="polite">
+        <p id="city-name">City: —</p>
+        <p id="temperature">Temperature: — °C</p>
+        <p id="weather-description">Description: —</p>
+        <p id="humidity">Humidity: — %</p>
+        <p id="wind-speed">Wind Speed: — m/s</p>
+        <p id="last-updated" class="small">Last updated: —</p>
+      </section>
+
+      <!-- Error / status message -->
+      <div id="status" class="status"></div>
+
+      <div class="forecast">
+        <h2>3-Day Weather Forecast</h2>
+        <div class="forecast-days"></div>
+      </div>
+
+      <!-- Removed the image part to avoid 404 -->
+      <div class="day-card">
+        <div class="day-date">Monday, May 25</div>
+        <div class="day-temperature">25°C</div>
+        <div class="day-description">Partly Cloudy</div>
+      </div>
+    </main>
+
     <script src="app.js"></script>
   </body>
-  <main class="container">
-    <!-- Search area -->
-    <div class="search-bar">
-      <input
-        type="text"
-        id="city-input"
-        placeholder="Enter city name (e.g., London)"
-        aria-label="City name"
-      />
-      <button id="search-btn" aria-label="Search">Search</button>
-    </div>
-
-    <!-- Optional: quick buttons -->
-    <div class="quick-buttons">
-      <button class="quick" data-city="New York">New York</button>
-      <button class="quick" data-city="Tokyo">Tokyo</button>
-      <button class="quick" data-city="Delhi">Delhi</button>
-    </div>
-
-    <!-- Weather display -->
-    <section class="weather-info" id="weather-info" aria-live="polite">
-      <p id="city-name">City: —</p>
-      <p id="temperature">Temperature: — °C</p>
-      <p id="weather-description">Description: —</p>
-      <p id="humidity">Humidity: — %</p>
-      <p id="wind-speed">Wind Speed: — m/s</p>
-      <p id="last-updated" class="small">Last updated: —</p>
-    </section>
-
-    <!-- Error / status message -->
-    <div id="status" class="status"></div>
-
-    <div class="forecast">
-      <h2>3-Day Weather Forecast</h2>
-      <div class="forecast-days"></div>
-    </div>
-
-    <div class="day-card">
-      <div class="day-date">Monday, May 25</div>
-      <div class="day-weather-icon">
-        <img src="weather-icon.png" alt="Weather Icon" />
-      </div>
-      <div class="day-temperature">25°C</div>
-      <div class="day-description">Partly Cloudy</div>
-    </div>
-  </main>
-
-  <script src="app.js"></script>
 </html>
