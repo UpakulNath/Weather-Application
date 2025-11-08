@@ -82,28 +82,33 @@ async function fetchWeatherData(latitude, longitude) {
 }
 
 function getUserLocation() {
-  // Simulated location data for New York
-  return {
-    latitude: 40.7128,
-    longitude: -74.0060
-  };
+const isLocationAvailable = Math.random() > 0.2; 
+if (!isLocationAvailable) {
+throw new Error("Failed to detect location. Geolocation data is unavailable.");
 }
+return {
+latitude: 40.7128,
+longitude: -74.0060
+};
+}
+
 
 // ⬇️ moved this OUTSIDE of fetchWeatherData so it's usable
 function generateWeatherForecast(city, latitude, longitude) {
+  if (typeof city !== "string" || city.trim() === "") {
+    throw new Error("Invalid city name. Please provide a valid city.");
+  }
   const weatherConditions = ["Sunny", "Cloudy", "Rainy", "Snowy"];
   const forecast = [];
   const currentDate = new Date();
-
   for (let i = 0; i < 3; i++) {
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    const temperature = Math.random() * 45 - 10; // -10 .. 35
+    const temperature = Math.random() * 45 - 10;
     const condition =
       weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
     const humidity = Math.random() * 100;
-
     forecast.push({
       date: `${month}/${day}/${year}`,
       temperature,
@@ -112,8 +117,10 @@ function generateWeatherForecast(city, latitude, longitude) {
       latitude,
       longitude,
     });
-
     currentDate.setDate(currentDate.getDate() + 1);
   }
   return forecast;
 }
+
+
+
